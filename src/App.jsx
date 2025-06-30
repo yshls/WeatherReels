@@ -21,7 +21,7 @@ function App() {
         {/* 링크 컴포넌트는 *클라이언트 사이드 렌더링* 방식으로 페이지 이동을 필요한 컴포넌트만 교체 */}
         <Link to={'/'}>Home</Link>
         <Link to={'/new'}>New</Link>
-        <Link to={'/diary'}>diary</Link>
+        <Link to={'/diary/:id'}>diary</Link>
         시킴으로
       </div>
 
