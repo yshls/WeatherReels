@@ -1,26 +1,12 @@
 import './App.css';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import New from './pages/New';
 import Diary from './pages/Diary';
 import Edit from './pages/Edit';
 import NotFound from './pages/NotFound';
 
-import Button from './components/Button';
-
-import { getWeatherImg } from './util/get_weather_img';
-import Header from './components/Header';
-// 1: "/": 모든 일기를 조회하는 Home 페이지
-// 2: "/new": 새로운 일기를 작성하는 new페이지
-// 3: "/diary": 일기를 상세히 조회하는 Diary 페이지
-
 function App() {
-  const nav = useNavigate();
-
-  const onClickButton = () => {
-    nav('/new');
-  };
-
   return (
     <>
       <Routes>
