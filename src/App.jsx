@@ -23,29 +23,6 @@ function App() {
 
   return (
     <>
-      <Header
-        title={'Header'}
-        leftChild={<Button text={'Left'} />}
-        rightChild={<Button text={'Right'} />}
-      />
-      {/* 버튼을 렌더링하다. */}
-      <Button
-        text={'123'}
-        // type={'DEFAULT'} <- 생략 가능
-        onClick={console.log('123번 버튼 클릭')}
-      />
-
-      <Button
-        text={'123'}
-        type={'POSITIVE'}
-        onClick={console.log('123번 버튼 클릭')}
-      />
-
-      <Button
-        text={'123'}
-        type={'NEGATIVE'}
-        onClick={console.log('123번 버튼 클릭')}
-      />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/new" element={<New />}></Route>
