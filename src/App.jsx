@@ -5,6 +5,13 @@ import New from './pages/New';
 import Diary from './pages/Diary';
 import NotFound from './pages/NotFound';
 
+import happy from './assets/happy.png';
+import sad from './assets/sad.png';
+import angry from './assets/angry.png';
+import excited from './assets/excited.png';
+import loney from './assets/loney.png';
+import tired from './assets/tired.png';
+
 // 1: "/": 모든 일기를 조회하는 Home 페이지
 // 2: "/new": 새로운 일기를 작성하는 new페이지
 // 3: "/diary": 일기를 상세히 조회하는 Diary 페이지
@@ -17,6 +24,15 @@ function App() {
   };
   return (
     <>
+      <div>
+        <img src={happy} alt="happy" />
+        <img src={sad} alt="sad" />
+        <img src={angry} alt="angry" />
+        <img src={excited} alt="excited" />
+        <img src={loney} alt="loney" />
+        <img src={tired} alt="tired" />
+      </div>
+
       <div>
         {/* 링크 컴포넌트는 *클라이언트 사이드 렌더링* 방식으로 페이지 이동을 필요한 컴포넌트만 교체 */}
         <Link to={'/'}>Home</Link>
