@@ -5,13 +5,7 @@ import New from './pages/New';
 import Diary from './pages/Diary';
 import NotFound from './pages/NotFound';
 
-import happy from './assets/happy.png';
-import sad from './assets/sad.png';
-import angry from './assets/angry.png';
-import excited from './assets/excited.png';
-import loney from './assets/loney.png';
-import tired from './assets/tired.png';
-
+import { getEmotionImg } from './util/get_emotion_img';
 // 1: "/": 모든 일기를 조회하는 Home 페이지
 // 2: "/new": 새로운 일기를 작성하는 new페이지
 // 3: "/diary": 일기를 상세히 조회하는 Diary 페이지
@@ -25,12 +19,11 @@ function App() {
   return (
     <>
       <div>
-        <img src={happy} alt="happy" />
-        <img src={sad} alt="sad" />
-        <img src={angry} alt="angry" />
-        <img src={excited} alt="excited" />
-        <img src={loney} alt="loney" />
-        <img src={tired} alt="tired" />
+        <img src={getEmotionImg(1)} alt="기분 좋고 밝은 상태" />
+        <img src={getEmotionImg(2)} alt="슬프고 감성적인 상태 감성적인 상태" />
+        <img src={getEmotionImg(3)} alt="화나고 격한 감정" />
+        <img src={getEmotionImg(4)} alt="혼란스럽고 불안한 상태" />
+        <img src={getEmotionImg(5)} alt="	무기력하고 지친 상태" />
       </div>
 
       <div>
