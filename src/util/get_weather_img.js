@@ -5,7 +5,7 @@ import Tornado from './../assets/Tornado.svg';
 import Cloudy from './../assets/Cloudy.svg';
 
 // 함수를 내보냄 -> export 키워드 사용
-export function getEmotionImg(emotionId) {
+export function getWeatherImg(emotionId) {
   switch (emotionId) {
     case 1:
       return Sunny;
