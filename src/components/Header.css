@@ -1,0 +1,34 @@
+.Header {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  backdrop-filter: blur(3.5px);
+  -webkit-backdrop-filter: blur(3.5px);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+
+  display: flex;
+  align-items: center;
+
+  padding: 20px 0px;
+}
+
+.Header > div {
+  display: flex;
+}
+
+.Header .header_center {
+  width: 50%;
+  font-size: 25px;
+  /* .Header > div안에서 *자식들*이 배치되는 위치를 가운데 설정 */
+  justify-content: center;
+}
+
+.Header .header_left {
+  width: 25%;
+  justify-content: flex-start;
+}
+
+.Header .header_right {
+  width: 25%;
+  justify-content: flex-end;
+}

@@ -1,36 +1,28 @@
 import './App.css';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { useReducer } from 'react';
 import Home from './pages/Home';
 import New from './pages/New';
 import Diary from './pages/Diary';
+import Edit from './pages/Edit';
 import NotFound from './pages/NotFound';
 
-// 1: "/": 모든 일기를 조회하는 Home 페이지
-// 2: "/new": 새로운 일기를 작성하는 new페이지
-// 3: "/diary": 일기를 상세히 조회하는 Diary 페이지
-
+const mockData = [
+  { id: 1, createDate: new Date(), emotionId: 1, content: '1번 일기 내용' },
+  { id: 2, createDate: new Date(), emotionId: 2, content: '3번 일기 내용' },
+];
+function reducer(state, action) {
+  return state;
+}
 function App() {
-  const nav = useNavigate();
-
-  const onClickButton = () => {
-    nav('/new');
-  };
+  const [data, dispatch] = useReducer(reducer, mockData);
   return (
     <>
-      <div>
-        {/* 링크 컴포넌트는 *클라이언트 사이드 렌더링* 방식으로 페이지 이동을 필요한 컴포넌트만 교체 */}
-        <Link to={'/'}>Home</Link>
-        <Link to={'/new'}>New</Link>
-        <Link to={'/diary'}>diary</Link>
-        시킴으로
-      </div>
-
-      <button onClick={onClickButton}>New페이지로 이동</button>
-
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/new" element={<New />}></Route>
-        <Route path="/diary" element={<Diary />}></Route>
+        <Route path="/diary/:id" element={<Diary />}></Route>
+        <Route path="/edit/:id" element={<Edit />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </>
