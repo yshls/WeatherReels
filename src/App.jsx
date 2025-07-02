@@ -71,17 +71,6 @@ function App() {
 
   return (
     <>
-      <button onClick={() => onCreate(new Date().getTime(), 1, 'Hello')}>
-        일기 추가 테스트
-      </button>
-
-      <button
-        onClick={() => onUpdate(1, new Date().getTime(), 2, 'update Hello')}
-      >
-        일기 수정 테스트
-      </button>
-
-      <button onClick={() => onDelete(1)}>일기 삭제 테스트</button>
       <DiaryStatecontext.Provider value={data}>
         {/* 상태 변화 함수를 공급받을 수 있게 되었다. */}
         <DiaryDispatchcontext.Provider value={(onCreate, onUpdate, onDelete)}>
