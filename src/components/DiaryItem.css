@@ -33,7 +33,22 @@
   font-size: 20px;
   text-decoration: underline;
   text-decoration-thickness: 3px;
-  text-decoration-color: rgba(60, 60, 60, 0.3);
+}
+
+.DiaryItem .info_section .created_date.created_date_1 {
+  text-decoration-color: #ffbd34;
+}
+.DiaryItem .info_section .created_date.created_date_2 {
+  text-decoration-color: #314eff;
+}
+.DiaryItem .info_section .created_date.created_date_3 {
+  text-decoration-color: #f57846;
+}
+.DiaryItem .info_section .created_date.created_date_4 {
+  text-decoration-color: #9a989b;
+}
+.DiaryItem .info_section .created_date.created_date_5 {
+  text-decoration-color: #dbd4f9;
 }
 
 .DiaryItem .info_section .content {
@@ -45,3 +60,7 @@
   align-items: center;
   justify-content: center;
 }
+
+/* .DiaryItem .img_section_1{
+  background-color: 이런식으로하면 된다.
+}; */

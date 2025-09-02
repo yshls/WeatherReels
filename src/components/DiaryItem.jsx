@@ -4,13 +4,17 @@ import './DiaryItem.css';
 import Button from './Button.jsx';
 
 const DiaryItem = () => {
+  const getWeatherImgId = 5;
+
   return (
     <div className="DiaryItem">
-      <div className="img_section">
-        <img src={getWeatherImg(1)} alt="날씨 아이콘" />
+      <div className={`img_section`}>
+        <img src={getWeatherImg(5)} alt="날씨 아이콘" />
       </div>
       <div className="info_section">
-        <div className="created_date">{new Date().toLocaleDateString()}</div>
+        <div className={`created_date created_date_${getWeatherImgId}`}>
+          {new Date().toLocaleDateString()}
+        </div>
         <div className="content">
           일기 내용이 여기에 들어갑니다. 오늘은 날씨가 맑고 기분이 좋습니다.
         </div>
