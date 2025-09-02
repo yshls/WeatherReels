@@ -18,23 +18,23 @@
 }
 
 .Button_POSITIVE {
-  background: rgba(0, 205, 28, 0.2);
-  border-radius: 16px;
+  background: #2ecc71;
+  border-radius: 14px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5.2px);
   -webkit-backdrop-filter: blur(5.2px);
-  border: 1px solid rgba(0, 205, 28, 0.11);
+  /* border: 1px solid rgba(0, 205, 28, 0.11); */
 
   color: #fff;
 }
 
 .Button_NEGATIVE {
-  background: rgba(205, 0, 0, 0.2);
-  border-radius: 16px;
+  background: #cd0000;
+  border-radius: 14px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5.2px);
   -webkit-backdrop-filter: blur(5.2px);
-  border: 1px solid rgba(205, 0, 0, 0.11);
+  /* border: 1px solid rgba(205, 0, 0, 0.11); */
 
   color: #fff;
 }
