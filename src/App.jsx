@@ -8,8 +8,24 @@ import Edit from './pages/Edit';
 import NotFound from './pages/NotFound';
 
 const mockData = [
-  { id: 1, createDate: new Date(), emotionId: 1, content: '1번 일기 내용' },
-  { id: 2, createDate: new Date(), emotionId: 2, content: '3번 일기 내용' },
+  {
+    id: 1,
+    createdDate: new Date('2025-09-03'),
+    emotionId: 1,
+    content: '1번 일기 내용',
+  },
+  {
+    id: 2,
+    createdDate: new Date('2025-09-02'),
+    emotionId: 2,
+    content: '2번 일기 내용',
+  },
+  {
+    id: 3,
+    createdDate: new Date('2025-08-02'),
+    emotionId: 3,
+    content: '3번 일기 내용',
+  },
 ];
 
 function reducer(state, action) {
@@ -26,21 +42,21 @@ function reducer(state, action) {
       return state;
   }
 }
-
-const DiaryStateContext = createContext();
-const DiaryDispatchContext = createContext();
+// 목데이터를 불러와 필터링하는 기능이 필요 -> home으로 빼내기
+export const DiaryStateContext = createContext();
+export const DiaryDispatchContext = createContext();
 
 function App() {
   const [data, dispatch] = useReducer(reducer, mockData);
   const idRef = useRef(3); // id를 관리하기 위한 ref
 
   // 새로운 일기 추가
-  const onCreate = (createDate, emotionId, content) => {
+  const onCreate = (createdDate, emotionId, content) => {
     dispatch({
       type: 'CREATE',
       date: {
         id: idRef.current++,
-        createDate,
+        createdDate,
         emotionId,
         content,
       },
