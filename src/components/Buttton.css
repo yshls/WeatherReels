@@ -13,6 +13,7 @@
 
   /* 줄 바꿈 안되게 설정  */
   white-space: nowrap;
+  font-family: inherit;
 
   color: #555;
 }
