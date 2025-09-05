@@ -55,7 +55,6 @@ body {
   -webkit-backdrop-filter: blur(var(--glass-blur));
   border: var(--glass-border);
 
-  padding: 0 20px;
   padding: var(--main-padding);
 }
 
