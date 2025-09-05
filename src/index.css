@@ -1,5 +1,15 @@
 @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 
+:root {
+  --max-width: 500px;
+  --glass-bg: rgba(255, 255, 255, 0.16);
+  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  --glass-blur: 4.6px;
+  --glass-border: 1px solid rgba(255, 255, 255, 0.11);
+  --main-padding: 0 20px;
+  --bg-color: #fff;
+}
+
 html,
 body {
   margin: 0px;
@@ -29,23 +39,24 @@ body {
       rgba(255, 180, 220, 0.4),
       transparent 70%
     );
-  background-color: #fff;
+  background-color: var(--bg-color);
 }
 
 #root {
-  max-width: 500px;
+  max-width: var(--max-width);
   width: 100%;
   margin: 0 auto;
   min-height: 100vh;
   height: 100%;
 
-  background: rgba(255, 255, 255, 0.16);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(4.6px);
-  -webkit-backdrop-filter: blur(4.6px);
-  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border);
 
   padding: 0 20px;
+  padding: var(--main-padding);
 }
 
 body {

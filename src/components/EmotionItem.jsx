@@ -1,8 +1,9 @@
 import './EmotionItem.css';
 import { getWeatherImg } from '../util/get_weather_img';
-const EmotionItem = ({ emotionId, emotionName, isSelected }) => {
+const EmotionItem = ({ emotionId, emotionName, isSelected, onClick }) => {
   return (
     <div
+      onClick={() => onClick(emotionId)}
       className={`EmotionItem ${
         isSelected ? `EmotionItem_on_${emotionId}` : ''
       }`}
