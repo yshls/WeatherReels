@@ -1,7 +1,7 @@
 import './Editor.css';
 import EmotionItem from './EmotionItem';
 import Button from './Button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const emotionList = [
@@ -21,13 +21,22 @@ const getStringedDate = (targetDate) => {
   return `${year}-${month}-${date}`;
 };
 
-const Editor = ({ onSubmit }) => {
+const Editor = ({ initData, onSubmit }) => {
   const nav = useNavigate();
   const [input, setInput] = useState({
     createdDate: new Date(), // 내부 상태는 Date 객체로 유지
     emotionId: 3, // 기본 감정
     content: '',
   });
+
+  useEffect(() => {
+    if (initData) {
+      setInput({
+        ...initData,
+        createdDate: new Date(initData.createdDate),
+      });
+    }
+  }, [initData]);
 
   const onChangeInput = (e) => {
     console.log(e.target.name); // 어떤 요소에 입력이 들어온건지
