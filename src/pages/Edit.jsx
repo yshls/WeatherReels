@@ -3,26 +3,15 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import Editor from '../components/Editor';
-import { useContext, useState, useEffect } from 'react';
-import { DiaryDispatchContext, DiaryStateContext } from '../App';
+import { useContext } from 'react';
+import { DiaryDispatchContext } from '../App';
+import useDiary from '../hooks/useDiary';
 
 const Edit = () => {
   const params = useParams();
   const nav = useNavigate();
+  const currentDiaryItem = useDiary(params.id);
   const { onDelete, onUpdate } = useContext(DiaryDispatchContext);
-  const data = useContext(DiaryStateContext);
-
-  const [currentDiaryItem, setCurrentDiaryItem] = useState();
-
-  useEffect(() => {
-    const item = data.find((it) => String(it.id) === String(params.id));
-    if (!item) {
-      window.alert('존재하지 않는 일기입니다.');
-      nav('/', { replace: true });
-      return;
-    }
-    setCurrentDiaryItem(item);
-  }, [params.id, data, nav]);
 
   const onClickDelete = () => {
     // window.confirm: 내장 객체를 활용하는 함수 <- 팝업창 나오게 한다.

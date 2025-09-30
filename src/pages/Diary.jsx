@@ -1,12 +1,35 @@
-import React from 'react';
-
-// useParams 훅은 현재 브라우저에 명시한 URL 파라미터의 값을 가져오는 커스텀 훅
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
+import Button from '../components/Button';
+import Viewer from '../components/Viewer';
+import useDiary from '../hooks/useDiary';
+import { getStringedDate } from '../util/getStringedDate';
 
 const Diary = () => {
   const params = useParams();
-  console.log(params);
-  return <div>{params.id}번 일기입니다.</div>;
+  const nav = useNavigate();
+
+  const currentDiaryItem = useDiary(params.id);
+
+  if (!currentDiaryItem) {
+    return <div>일기를 불러오고 있습니다...</div>;
+  }
+
+  const { createdDate, emotionId, content } = currentDiaryItem;
+  const title = `${getStringedDate(new Date(createdDate))} 기록`;
+
+  return (
+    <div>
+      <Header
+        title={title}
+        leftChild={<Button text={'< 뒤로 가기'} onClick={() => nav(-1)} />}
+        rightChild={
+          <Button text={'수정하기'} onClick={() => nav(`/edit/${params.id}`)} />
+        }
+      />
+      <Viewer emotionId={emotionId} content={content} />
+    </div>
+  );
 };
 
 export default Diary;
