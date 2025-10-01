@@ -1,106 +1,122 @@
+import React, { useReducer, useRef, useEffect, useState } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
-import { useReducer, useRef, createContext } from 'react';
 import Home from './pages/Home';
 import New from './pages/New';
 import Diary from './pages/Diary';
 import Edit from './pages/Edit';
-import NotFound from './pages/NotFound';
-
-const mockData = [
-  {
-    id: 1,
-    createdDate: new Date('2025-09-03'),
-    emotionId: 1,
-    content: '1번 일기 내용',
-  },
-  {
-    id: 2,
-    createdDate: new Date('2025-09-02'),
-    emotionId: 2,
-    content: '2번 일기 내용',
-  },
-  {
-    id: 3,
-    createdDate: new Date('2025-08-02'),
-    emotionId: 3,
-    content: '3번 일기 내용',
-  },
-];
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'CREATE':
-      return [action.date, ...state];
-    case 'UPDATE':
-      return state.map((item) =>
-        item.id === action.date.id ? action.date : item
+    case 'INIT': {
+      return action.data;
+    }
+    case 'CREATE': {
+      const newState = [action.data, ...state];
+      localStorage.setItem('diary', JSON.stringify(newState));
+      return newState;
+    }
+    case 'UPDATE': {
+      const newState = state.map((it) =>
+        String(it.id) === String(action.data.id) ? { ...action.data } : it
       );
-    case 'DELETE':
-      return state.filter((item) => String(item.id) !== String(action.id));
-    default:
+      localStorage.setItem('diary', JSON.stringify(newState));
+      return newState;
+    }
+    case 'DELETE': {
+      const newState = state.filter(
+        (it) => String(it.id) !== String(action.targetId)
+      );
+      localStorage.setItem('diary', JSON.stringify(newState));
+      return newState;
+    }
+    default: {
       return state;
+    }
   }
 }
-// 목데이터를 불러와 필터링하는 기능이 필요 -> home으로 빼내기
-export const DiaryStateContext = createContext();
-export const DiaryDispatchContext = createContext();
+
+export const DiaryStateContext = React.createContext();
+export const DiaryDispatchContext = React.createContext();
 
 function App() {
-  const [data, dispatch] = useReducer(reducer, mockData);
-  const idRef = useRef(3); // id를 관리하기 위한 ref
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [data, dispatch] = useReducer(reducer, []);
+  const idRef = useRef(0);
 
-  // 새로운 일기 추가
-  const onCreate = (createdDate, emotionId, content) => {
+  useEffect(() => {
+    const rawData = localStorage.getItem('diary');
+    if (!rawData) {
+      setIsDataLoaded(true);
+      return;
+    }
+    const localData = JSON.parse(rawData);
+    if (localData.length === 0) {
+      setIsDataLoaded(true);
+      return;
+    }
+    localData.sort((a, b) => Number(b.id) - Number(a.id));
+    idRef.current = localData[0].id + 1;
+
+    dispatch({ type: 'INIT', data: localData });
+    setIsDataLoaded(true);
+  }, []);
+
+  const onCreate = (date, content, emotionId) => {
     dispatch({
       type: 'CREATE',
-      date: {
-        id: idRef.current++,
-        createdDate,
-        emotionId,
+      data: {
+        id: idRef.current,
+        date: new Date(date).getTime(),
         content,
+        emotionId,
       },
     });
+    idRef.current += 1;
   };
 
-  // 기존 일기 수정
-  const onUpdate = (id, createDate, emotionId, content) => {
+  const onUpdate = (targetId, date, content, emotionId) => {
     dispatch({
       type: 'UPDATE',
-      // 수정에 필요한 매게변수를 적는다.
-      date: {
-        id,
-        createDate,
-        emotionId,
+      data: {
+        id: targetId,
+        date: new Date(date).getTime(),
         content,
+        emotionId,
       },
     });
   };
 
-  // 기존 일기 삭제
-  const onDelete = (id) => {
+  const onDelete = (targetId) => {
     dispatch({
       type: 'DELETE',
-      id,
+      targetId,
     });
   };
 
-  return (
-    <>
+  if (!isDataLoaded) {
+    return <div>데이터를 불러오는 중입니다</div>;
+  } else {
+    return (
       <DiaryStateContext.Provider value={data}>
-        {/* 상태 변화 함수를 공급받을 수 있게 되었다. */}
-        <DiaryDispatchContext.Provider value={{ onCreate, onUpdate, onDelete }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/new" element={<New />} />
-            <Route path="/diary/:id" element={<Diary />} />
-            <Route path="/edit/:id" element={<Edit />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+        <DiaryDispatchContext.Provider
+          value={{
+            onCreate,
+            onUpdate,
+            onDelete,
+          }}
+        >
+          <div className="App">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/new" element={<New />} />
+              <Route path="/diary/:id" element={<Diary />} />
+              <Route path="/edit/:id" element={<Edit />} />
+            </Routes>
+          </div>
         </DiaryDispatchContext.Provider>
       </DiaryStateContext.Provider>
-    </>
-  );
+    );
+  }
 }
-
 export default App;
